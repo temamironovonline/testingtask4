@@ -6,18 +6,40 @@ namespace MyApp // Note: actual namespace depends on the project name.
     {
         static void Main(string[] args)
         {
-            Console.WriteLine($"{Sin(2)}");
+            Console.WriteLine($"{sin(2)}");
             Console.WriteLine($"{Math.Sin(2)}");
-            Console.WriteLine($"{Cos(-2)}");
+            Console.WriteLine($"{cos(-2)}");
             Console.WriteLine($"{Math.Cos(-2)}");
-            
+            Console.WriteLine($"{log(2)}");
             //https://math.semestr.ru/math/taylor.php
 
 
         }
 
 
-        static double Sin(double x)
+        static double log(double x)
+        {
+            
+            double s = 0.0;
+            double a = 0.5;
+            double u = x;
+            for (int i = 0; i < 16; i++)
+            {
+                u = u * u;
+                if (u > 2)
+                {
+                    u = u / 2;
+                    s += a;
+                }
+                a *= 0.5;
+            }
+            x = Math.Log(x, 2);
+            double err = 100 * Math.Abs(2 * (s - x) / (s + x));
+            Console.WriteLine($"{s}, {x}");
+            return 0;
+        }
+
+        static double sin(double x)
         {
             const double eps = 1e-15;  // погрешность вычислений
             double s = 0;  // начальная сумма
@@ -32,7 +54,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
             return s;       // возврат результата
         }
 
-        static double Cos(double x)
+        static double cos(double x)
         {
             const double eps = 1e-15;  // погрешность вычислений
             double s = 0;  // начальная сумма
