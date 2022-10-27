@@ -10,33 +10,24 @@ namespace MyApp // Note: actual namespace depends on the project name.
             Console.WriteLine($"{Math.Sin(2)}");
             Console.WriteLine($"{cos(-2)}");
             Console.WriteLine($"{Math.Cos(-2)}");
-            Console.WriteLine($"{log(2)}");
+            Console.WriteLine($"{log(2, 8)}");
             //https://math.semestr.ru/math/taylor.php
 
 
         }
 
 
-        static double log(double x)
+        static double log(double osn, double x)
         {
-            
-            double s = 0.0;
-            double a = 0.5;
-            double u = x;
-            for (int i = 0; i < 16; i++)
+            double degree = 0.000001;
+
+            while(Math.Pow(osn, degree) < x)
             {
-                u = u * u;
-                if (u > 2)
-                {
-                    u = u / 2;
-                    s += a;
-                }
-                a *= 0.5;
+                degree += 0.000001;
             }
-            x = Math.Log(x, 2);
-            double err = 100 * Math.Abs(2 * (s - x) / (s + x));
-            Console.WriteLine($"{s}, {x}");
-            return 0;
+
+            return degree;
+
         }
 
         static double sin(double x)
